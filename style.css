@@ -1,0 +1,517 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    overflow: hidden;
+    position: relative;
+    min-height: 700px;
+}
+
+.slide {
+    display: none;
+    padding: 30px;
+    animation: fadeIn 0.5s ease;
+}
+
+.slide.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+header {
+    background: linear-gradient(135deg, #2c3e50, #34495e);
+    color: white;
+    padding: 30px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 2.2rem;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+h2 {
+    color: #2c3e50;
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+}
+
+h3 {
+    color: #2c3e50;
+    margin-bottom: 15px;
+    font-size: 1.4rem;
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+.content {
+    padding: 30px;
+}
+
+.correction-alert {
+    background: linear-gradient(135deg, #ff6b6b, #ff4757);
+    color: white;
+    padding: 25px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    text-align: center;
+    font-size: 1.2rem;
+    border: 5px solid white;
+    box-shadow: 0 10px 30px rgba(255, 71, 87, 0.3);
+}
+
+.input-section {
+    background: #f8f9fa;
+    border-radius: 10px;
+    padding: 25px;
+    margin-bottom: 25px;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+.input-row {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+input[type="range"] {
+    flex: 1;
+    height: 8px;
+    border-radius: 4px;
+    background: #e0e0e0;
+    outline: none;
+    -webkit-appearance: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #3498db;
+    cursor: pointer;
+    border: 4px solid white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+input[type="range"]#heaterPower::-webkit-slider-thumb {
+    background: #e74c3c;
+}
+
+input[type="range"]#flowRate::-webkit-slider-thumb {
+    background: #27ae60;
+}
+
+input[type="range"]#tankVolume::-webkit-slider-thumb {
+    background: #9b59b6;
+}
+
+.value-display {
+    min-width: 80px;
+    text-align: center;
+    font-weight: bold;
+    color: #3498db;
+    font-size: 1.2rem;
+    padding: 5px 10px;
+    background: white;
+    border-radius: 5px;
+    border: 2px solid #3498db;
+}
+
+.power-display {
+    color: #e74c3c;
+    border-color: #e74c3c;
+}
+
+.flow-display {
+    color: #27ae60;
+    border-color: #27ae60;
+}
+
+.volume-display {
+    color: #9b59b6;
+    border-color: #9b59b6;
+}
+
+.equation-section {
+    background: #2c3e50;
+    color: white;
+    border-radius: 10px;
+    padding: 25px;
+    margin: 25px 0;
+    font-family: 'Courier New', monospace;
+    font-size: 1.2rem;
+    line-height: 1.6;
+}
+
+.visualization {
+    background: white;
+    border-radius: 10px;
+    padding: 25px;
+    margin: 25px 0;
+    border: 2px solid #e0e0e0;
+    text-align: center;
+}
+
+.mix-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    margin: 30px 0;
+    flex-wrap: wrap;
+}
+
+.mix-circle {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    position: relative;
+    overflow: hidden;
+}
+
+.hot-segment {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background: #ff6b6b;
+    transition: height 0.5s ease;
+}
+
+.cold-segment {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    background: #42a5f5;
+    transition: height 0.5s ease;
+}
+
+.mix-label {
+    position: relative;
+    z-index: 1;
+    text-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+
+.table-container {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 25px 0;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 12px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+th {
+    background: #3498db;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background: #f8f9fa;
+}
+
+.highlight {
+    background: #fff8e1 !important;
+    font-weight: bold;
+}
+
+.conclusion {
+    background: #e8f4fc;
+    border-left: 5px solid #3498db;
+    padding: 25px;
+    margin: 25px 0;
+    border-radius: 0 10px 10px 0;
+}
+
+button {
+    padding: 15px 40px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin: 10px;
+}
+
+.btn-primary {
+    background: #3498db;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #2980b9;
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    background: #95a5a6;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background: #7f8c8d;
+}
+
+.btn-danger {
+    background: #e74c3c;
+    color: white;
+}
+
+.btn-danger:hover {
+    background: #c0392b;
+}
+
+.controls {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 2px solid #eee;
+}
+
+.slide-indicator {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.indicator-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #ddd;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.indicator-dot.active {
+    background: #3498db;
+    transform: scale(1.2);
+}
+
+.step-number {
+    background: #3498db;
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+.step-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.cooling-simulation {
+    background: #f9f9f9;
+    border-radius: 10px;
+    padding: 25px;
+    margin: 25px 0;
+    text-align: center;
+}
+
+.temperature-bar {
+    width: 100%;
+    height: 30px;
+    background: #eee;
+    border-radius: 15px;
+    margin: 20px 0;
+    overflow: hidden;
+    position: relative;
+}
+
+.temperature-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #42a5f5, #ff6b6b);
+    transition: width 1s ease;
+    border-radius: 15px;
+}
+
+.temperature-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    color: #666;
+}
+
+.simulation-controls {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.time-display {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #2c3e50;
+    margin: 20px 0;
+}
+
+.heater-display {
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    margin: 20px 0;
+    display: inline-block;
+}
+
+.flow-display-box {
+    background: linear-gradient(135deg, #27ae60, #219653);
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    margin: 20px 0;
+    display: inline-block;
+}
+
+.volume-display-box {
+    background: linear-gradient(135deg, #9b59b6, #8e44ad);
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    margin: 20px 0;
+    display: inline-block;
+}
+
+.energy-balance {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin: 25px 0;
+}
+
+.energy-box {
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.energy-loss {
+    background: #e8f4fc;
+    border: 2px solid #3498db;
+}
+
+.energy-gain {
+    background: #ffeaea;
+    border: 2px solid #e74c3c;
+}
+
+.energy-net {
+    background: #f0f8f0;
+    border: 2px solid #27ae60;
+    grid-column: span 2;
+}
+
+.formula-explanation {
+    background: #f8f9fa;
+    border-left: 4px solid #3498db;
+    padding: 15px;
+    margin: 15px 0;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+}
+
+.variables-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+    margin: 25px 0;
+}
+
+.variable-card {
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .container {
+        margin: 10px;
+        padding: 10px;
+    }
+    
+    .content {
+        padding: 15px;
+    }
+    
+    .mix-container {
+        flex-direction: column;
+    }
+    
+    .controls {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .energy-balance {
+        grid-template-columns: 1fr;
+    }
+    
+    .energy-net {
+        grid-column: span 1;
+    }
+    
+    .variables-grid {
+        grid-template-columns: 1fr;
+    }
+}
